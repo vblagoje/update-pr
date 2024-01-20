@@ -2,7 +2,7 @@ name: update-pr
 description: Easily update PR descriptions from actions
 author: Vladimir Blagojevic
 branding:
-  icon: edit-2
+  icon: git-pull-request
   color: blue
 inputs:
   pr-body:
