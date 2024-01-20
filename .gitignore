@@ -1,0 +1,4 @@
+# lets gitignore Idea and VS Code project files
+.idea
+.vscode
+

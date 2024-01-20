@@ -1,0 +1,39 @@
+name: update-pr
+description: Easily update PR descriptions from actions
+author: Vladimir Blagojevic
+branding:
+  icon: edit-2
+  color: blue
+inputs:
+  pr-body:
+    description: The new body text for the pull request
+    required: true
+  pr-number:
+    description: The number of the pull request to update
+    required: false # If not provided, the action will use the pull request number from the context
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/github-script@v5
+      with:
+        script: |
+          const body = "${{ inputs.pr-body }}";
+          let prNum = ${{ inputs.pr-number }};
+          
+          // If pr-number is not provided, use the context variable
+          if (!prNum) {
+            const payload = github.context.payload;
+            if (payload.pull_request) {
+              prNum = payload.pull_request.number;
+            } else {
+              throw new Error("Pull request number (pr_number) is not provided and not available in context");
+            }
+          }
+
+          github.rest.pulls.update({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: prNum,
+            body: body
+          });
