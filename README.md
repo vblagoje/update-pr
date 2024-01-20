@@ -18,6 +18,7 @@ To use this action in your workflow, add the following step:
 ## Inputs
 - `pr-body`: **Required** The new body text for the pull request.
 - `pr-number`: **Optional** The number of the pull request to update. If omitted, the action will attempt to use the pull request number from the triggering event.
+- `token`: **Optional** Personal Access Token for GitHub API (if not provided, defaults to GITHUB_TOKEN)
 
 ## Example Workflow
 Here's an example of how to use `vblagoje/update-pr` in a workflow:
