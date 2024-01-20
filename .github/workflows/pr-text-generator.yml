@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Run Auto PR Writer on initial open PR
         id: auto_pr_writer_for_pr
-        uses: ./
+        uses: vblagoje/auto-pr-writer@v2
         with:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           openai_base_url: https://api.fireworks.ai/inference/v1
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'issue_comment' && github.event.issue.pull_request && contains(github.event.comment.body, '@auto-pr-writer-bot')
     steps:
-      
+
       - name: Fetch PR details for comment event
         id: pr_details
         uses: octokit/request-action@v2.x
@@ -39,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Auto PR Writer on PR comment
-        uses: ./
+        uses: vblagoje/auto-pr-writer@v2
         id: auto_pr_writer_for_comment
         with:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
