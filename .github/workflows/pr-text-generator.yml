@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
+      - name: Print to Log
+        id: print-to-log
+        uses: actions/hello-world-docker-action@main
+        with:
+          who-to-greet: Svijet
       - name: Run Auto PR Writer on initial open PR
         id: auto_pr_writer_for_pr
         uses: vblagoje/auto-pr-writer@v2
