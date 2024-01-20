@@ -13,27 +13,20 @@ inputs:
     required: false # If not provided, the action will use the pull request number from the context
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - uses: actions/github-script@v5
+    - uses: actions/github-script@v7
+      env:
+        PR_BODY: ${{ inputs.pr-body }}
+        INPUT_PR_NUMBER: ${{ inputs.pr-number }}
+        CONTEXT_PR_NUMBER: ${{ github.event.number }}
       with:
         script: |
-          const body = "${{ inputs.pr-body }}";
-          let prNum = ${{ inputs.pr-number }};
-          
-          // If pr-number is not provided, use the context variable
-          if (!prNum) {
-            const payload = github.context.payload;
-            if (payload.pull_request) {
-              prNum = payload.pull_request.number;
-            } else {
-              throw new Error("Pull request number (pr_number) is not provided and not available in context");
-            }
-          }
-
-          github.rest.pulls.update({
+          const body = process.env.PR_BODY;
+          const prNumber = process.env.INPUT_PR_NUMBER || process.env.CONTEXT_PR_NUMBER;                    
+          await github.rest.pulls.update({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            pull_number: prNum,
+            pull_number: prNumber,
             body: body
           });
