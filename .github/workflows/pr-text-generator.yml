@@ -21,7 +21,7 @@ jobs:
           user_prompt: ${{ github.event.pull_request.body }}
 
       - name: Update PR description
-        uses: vblagoje/update-pr@v1
+        uses: ./
         with:
           pr-body: ${{ steps.auto_pr_writer_for_pr.outputs.generated_pr_text }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +50,7 @@ jobs:
           generation_model: accounts/fireworks/models/mixtral-8x7b-instruct
 
       - name: Update Pull Request Description
-        uses: vblagoje/update-pr@v1
+        uses: ./
         with:
           pr-body: ${{ steps.auto_pr_writer_for_comment.outputs.generated_pr_text }}
           pr-number: ${{ github.event.issue.number }}
