@@ -32,9 +32,7 @@ runs:
             auth: process.env.GITHUB_TOKEN,
           });
           const body = process.env.PR_BODY;
-          const prNumber = process.env.INPUT_PR_NUMBER || process.env.CONTEXT_PR_NUMBER;      
-          octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-          
+          const prNumber = process.env.INPUT_PR_NUMBER || process.env.CONTEXT_PR_NUMBER;                
           await octokit.rest.pulls.update({
             owner: context.repo.owner,
             repo: context.repo.repo,
