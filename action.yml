@@ -27,6 +27,10 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github-token }}
       with:
         script: |
+          import { Octokit } from "octokit";
+          const octokit = new Octokit({ 
+            auth: process.env.GITHUB_TOKEN,
+          });
           const body = process.env.PR_BODY;
           const prNumber = process.env.INPUT_PR_NUMBER || process.env.CONTEXT_PR_NUMBER;      
           octokit = github.getOctokit(process.env.GITHUB_TOKEN);
