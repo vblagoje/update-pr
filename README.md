@@ -43,5 +43,5 @@ In this example, the action will update the description of the pull request that
 Contributions to `vblagoje/update-pr` are welcome! 
 
 ## License
-This project is licensed under [LICENSE_NAME]. See the [LICENSE](LICENSE) file for details.
+This project is licensed under [MIT License](LICENSE).
 

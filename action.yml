@@ -1,5 +1,5 @@
 name: update-pr
-description: Easily update PR descriptions from actions
+description: Easily update PR descriptions from GitHub workflows
 author: Vladimir Blagojevic
 branding:
   icon: git-pull-request
