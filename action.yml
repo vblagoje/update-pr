@@ -12,8 +12,8 @@ inputs:
     description: The number of the pull request to update
     required: false # If not provided, the action will use the pull request number from the context
   token:
-    description: Personal Access Token for GitHub API (if not provided, defaults to GITHUB_TOKEN)
-    required: false
+    description: Personal Access Token for GitHub API ( e.g. secrets.GITHUB_TOKEN or Personal Access Token )
+    required: true
 
 runs:
   using: "composite"
@@ -26,7 +26,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.token }}
       with:
         script: |
-          const token = process.env.GITHUB_TOKEN || secrets.GITHUB_TOKEN;
+          const token = process.env.GITHUB_TOKEN;
           const octokit = github.getOctokit(token);
           
           const body = process.env.PR_BODY;
